@@ -1,0 +1,88 @@
+<div fxFlex="66" fxFlexOffset="15">
+  <form class="" [formGroup]="counterpartiesForm" fxLayout="column" fxLayoutAlign="space-around">
+    <h1 class="mat-h1" fxLayoutAlign="center">
+      COUNTERPARTIES FORM
+    </h1>
+
+    <mat-form-field class="">
+      <input required type="text" maxlength="10" #counterpartyIdRicos formControlName="counterpartyIdRicos" matInput
+        placeholder="Counterparty Id RICOS">
+      <mat-hint align="end">{{counterpartyIdRicos.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="text" maxlength="10" #counterpartyName formControlName="counterpartyName" matInput
+        placeholder="Counterparty name">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input type="text" maxlength="10" #ratingMethodology formControlName="ratingMethodology" matInput placeholder="Rating methodology">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input type="text" maxlength="10" #groupIdRicos formControlName="groupIdRicos" matInput placeholder="Group Id RICOS">
+      <mat-hint align="end">{{groupIdRicos.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="rating" placeholder="Rating">
+        <mat-option *ngFor="let rating of ratings" [value]="rating.value"> {{rating.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="sector" placeholder="Sector">
+        <mat-option *ngFor="let sector of sectors" [value]="sector.value"> {{sector.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="category" placeholder="Category">
+        <mat-option *ngFor="let category of categories" [value]="category.value"> {{category.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="baselPortofolio" placeholder="Basel portofolio">
+        <mat-option *ngFor="let baselPortofolio of baselPortofolios" [value]="baselPortofolio.value">
+          {{baselPortofolio.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="countryOfResidence" placeholder="Country of residence">
+        <mat-option *ngFor="let countryOfResidence of countryOfResidences" [value]="countryOfResidence.value">
+          {{countryOfResidence.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="countryOfRisk" placeholder="Country of risk">
+        <mat-option *ngFor="let countryOfRisk of countryOfRisks" [value]="countryOfRisk.value">
+          {{countryOfRisk.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="role" placeholder="Role">
+        <mat-option *ngFor="let role of roles" [value]="role.value"> {{role.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="number" min="0" #revenuesAmountEur formControlName="revenuesAmountEur" matInput placeholder="Revenues amount (EUR)">
+      <mat-error *ngIf="counterpartiesForm.get('revenuesAmountEur').hasError('negativeValueError')">
+        Please enter a value superior to 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput [matDatepicker]="picker" formControlName="unpaidDebtsStartDate" placeholder="Unpaid debts Start">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <button [disabled]="!counterpartiesForm.valid" (click)="validate()" class="" mat-stroked-button color="primary">Validate</button>
+  </div>
+</div>

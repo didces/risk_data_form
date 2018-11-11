@@ -1,0 +1,112 @@
+<div fxFlex="66" fxFlexOffset="15">
+  <form class="" [formGroup]="riskDataForm" fxLayout="column" fxLayoutAlign="space-around">
+    <h1 class="mat-h1" fxLayoutAlign="center">
+      TRANSACTIONS FORM
+    </h1>
+    <mat-form-field>
+      <input required matInput [matDatepicker]="picker" formControlName="asOfDate" placeholder="As Of Date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="number" min="0" #transactionReference formControlName="transactionReference" matInput
+        placeholder="Transaction reference">
+      <mat-error *ngIf="riskDataForm.get('transactionReference').hasError('negativeValueError')">
+        Please enter a value superior to 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-radio-group required formControlName="seniority">
+      <mat-radio-button value="SEN">SEN</mat-radio-button>
+      <mat-radio-button value="JUN">JUN</mat-radio-button>
+    </mat-radio-group>
+
+
+    <mat-form-field class="">
+      <input required type="text" maxlength="10" #counterpartyIdRicos formControlName="counterpartyIdRicos" matInput
+        placeholder="Counterparty Id RICOS">
+      <mat-hint align="end">{{counterpartyIdRicos.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+
+    <mat-form-field class="">
+      <input required type="number" min="0" formControlName="capitalReimbursementAmount" matInput placeholder="Capital reimboursement Amount">
+      <mat-error *ngIf="riskDataForm.get('capitalReimbursementAmount').hasError('negativeValueError')">
+        Please enter a value superior to 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput [matDatepicker]="picker1" formControlName="capitalReimbursementDate" placeholder="capital Reimbursement Date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-radio-group required formControlName="onBalanceFlag">
+      <mat-radio-button value="B">B</mat-radio-button>
+      <mat-radio-button value="C">C</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="">
+      <input required type="text" maxlength="10" #guarantorIdRicos formControlName="guarantorIdRicos" matInput
+        placeholder="Guarantor Id RICOS">
+      <mat-hint align="end">{{guarantorIdRicos.value.length}} / 10</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="number" min="0" formControlName="interestRatePaymentFrequency" matInput placeholder="Interest Rate Payment Frequency">
+      <mat-error *ngIf="riskDataForm.get('interestRatePaymentFrequency').hasError('negativeValueError')">
+        Please enter a value superior to 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="interestRatePeriodicity" placeholder="Interest rate periodicity">
+        <mat-option *ngFor="let interestRatePeriodicity of interestRatePeriodicities" [value]="interestRatePeriodicity.value">
+          {{interestRatePeriodicity.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="number" formControlName="interestRateValue" matInput placeholder="Interest Rate Value">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput [matDatepicker]="picker2" formControlName="transactionMaturityDate" placeholder="transaction maturity Date">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="number" formControlName="ccf" matInput placeholder="Ccf">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input required type="number" formControlName="lgd" matInput placeholder="Lgd">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="productLine" placeholder="Product line">
+        <mat-option *ngFor="let productLine of productLines" [value]="productLine.value"> {{productLine.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="riskType" placeholder="Risk type">
+        <mat-option *ngFor="let riskType of riskTypes" [value]="riskType.value"> {{riskType.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select required formControlName="transactionProductType" placeholder="Transaction product type">
+        <mat-option *ngFor="let transactionProductType of transactionProductTypes" [value]="transactionProductType.value">
+          {{transactionProductType.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <button [disabled]="!riskDataForm.valid" (click)="validate()" class="" mat-stroked-button color="primary">Validate</button>
+  </div>
+</div>
